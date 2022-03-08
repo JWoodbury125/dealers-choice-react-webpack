@@ -16,7 +16,7 @@ app.get("/books", async (req, res, next) => {
   }
 });
 
-app.get("/books/:bookId", async (req, res, next) => {
+app.get("/:bookId", async (req, res, next) => {
   try {
     const book = await Book.findByPk(req.params.bookId);
     res.send(book);
