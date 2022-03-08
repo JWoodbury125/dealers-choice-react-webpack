@@ -1,27 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import { response } from "express";
-import url from "url";
 
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      books: "",
+      books: [],
     };
   }
   async componentDidMount() {
-    const repsponse = await axios.get("/books");
-    console.log(response);
-    // this.setState({ books: response.data });
+    const response = await axios.get("/books");
+    this.setState({ books: response.data });
+    console.log(this.state.books);
   }
 
   render() {
     return (
       <div>
-        <p> </p>
+        <div> {this.state.books}</div>
       </div>
     );
   }
