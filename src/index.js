@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
+const Book = (props) => {
+  const books = props.book;
+  return <ul> {books.name} </ul>;
+};
 class App extends React.Component {
   constructor() {
     super();
@@ -10,6 +14,7 @@ class App extends React.Component {
       books: [],
     };
   }
+
   async componentDidMount() {
     const response = await axios.get("/books");
     this.setState({ books: response.data });
@@ -18,9 +23,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <div> {this.state.books}</div>
-      </div>
+      <ul>
+        {this.state.books.map((book) => {
+          return <Book key={book.id} book={book} />;
+        })}
+      </ul>
     );
   }
 }

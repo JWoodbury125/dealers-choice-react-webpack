@@ -10,11 +10,7 @@ app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 app.get("/books", async (req, res, next) => {
   try {
     const books = await Book.findAll();
-    const html = books.map((book) => {
-      return `${book.name}`;
-    });
-    res.send(`
-            <div> ${html}</div>`);
+    res.send(books);
   } catch (ex) {
     next(ex);
   }
